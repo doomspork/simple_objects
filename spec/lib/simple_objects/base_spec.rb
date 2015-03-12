@@ -3,11 +3,14 @@ require 'spec_helper'
 module SimpleObjects
   describe Base do
 
-    class MockObject
+    class ExampleBase
       include Base
 
-      attr_accessor :one, :two, :three
+      attribute :one
+      attribute :two
     end
+
+    subject { ExampleBase.new }
 
     describe '#initialize' do
       let(:args) do
@@ -17,17 +20,12 @@ module SimpleObjects
         }
       end
 
-      subject { MockObject.new(args) }
+      subject { ExampleBase.new(args) }
 
       its(:one) { is_expected.to eq 1 }
       its(:two) { is_expected.to eq 3 }
-      its(:three) { is_expected.to be_nil }
     end
 
-    describe '#to_h' do
-      subject { MockObject.new(one: 'foo', two: 2).to_h }
-
-      it { is_expected.to include(one: 'foo', two: 2, three: nil) }
-    end
+    it { is_expected.to respond_to(:to_h) }
   end
 end
