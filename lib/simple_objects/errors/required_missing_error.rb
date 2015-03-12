@@ -1,0 +1,2 @@
+class RequiredMissingError < RuntimeError
+end
