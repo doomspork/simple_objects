@@ -10,17 +10,27 @@ Add this line to your application's Gemfile:
 
 	gem 'simple_objects'
 
-And then execute:
-
-	$ bundle install
-
-Or install it yourself as:
-
-	$ gem install simple_objects
-
 And require it:
 
 	require 'simple_objects'
+
+## Usage
+
+```ruby
+class SuperHero
+	include SimpleObjects::Base
+	
+	attribute :name, required: true, type: String
+	attribute :power, required: true, type: String
+	attribute :age, type: Numeric
+end
+
+SuperHero.new(name: 'Superman', power: 'Super stuff', age: 34)
+
+SuperHero.new(name: 'Spiderman', age: 20) #=> raises RequiredMissingError
+
+SuperHero.new(name: 'Spiderman', power: {}) #=> raises MismatchedTypeError
+```
 
 ## Contributing
 
