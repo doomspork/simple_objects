@@ -38,7 +38,7 @@ Feedback and fixes are always welcome.  Please make use of [Issues](https://gith
 
 ## Author/Contact
 
-SimpleObjects is written and maintained by [@doomspork](github.com/doomspork).
+SimpleObjects is written and maintained by [@doomspork](http://github.com/doomspork).
 
 ## License
 
