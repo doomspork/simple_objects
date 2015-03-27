@@ -4,16 +4,13 @@ module SimpleObjects
   describe Serialization do
 
     class ExampleSerialization
-      include Serialization
+      include Base
 
-      attr_accessor :one, :two
+      attribute :one
+      attribute :two
 
       def timestamp
         Time.now
-      end
-
-      def attributes
-        [:one, :two]
       end
     end
 
@@ -47,17 +44,18 @@ module SimpleObjects
       end
 
       context 'with a collection' do
+        let(:example) { ExampleSerialization.new(one: [ExampleSerialization.new]) }
+
         it 'will call .to_h on entries' do
-          example.one = [ExampleSerialization.new]
           expect(subject[:one]).to be_a Array
           expect(subject[:one].first).to include(:one, :two)
         end
       end
 
       context 'with a value that responds to .to_h' do
-        it 'will call .to_h' do
-          example.one = ExampleSerialization.new
+        let(:example) { ExampleSerialization.new(one: ExampleSerialization.new) }
 
+        it 'will call .to_h' do
           expect(subject[:one]).to include(:one, :two)
         end
       end
