@@ -22,7 +22,7 @@ module SimpleObjects
     end
 
     def hashed_values
-      attributes.each_with_object({}) do |k, hsh|
+      attributes.each_with_object({}) do |(k, _), hsh|
         val = send(k)
         # `nil.to_h` => {} which we do not want
         if val.nil?
