@@ -20,7 +20,11 @@ module SimpleObjects
       end
 
       def attributes
-        @attributes || {}
+        unless @attributes
+          @attributes = superclass.attributes if defined?(superclass.attributes)
+          @attributes ||= {}
+        end
+        @attributes
       end
     end
 
