@@ -1,18 +1,30 @@
 require 'spec_helper'
+require 'pry'
 
 module SimpleObjects
   describe Attributes do
+    class BasicExample
+      include Attributes
+
+      attribute :foo
+    end
 
     describe '.attribute' do
-      class BasicExample
-        include Attributes
-
-        attribute :foo
-      end
-
       subject { BasicExample.new }
 
       it { is_expected.to respond_to :foo }
+
+      it 'is inherited' do
+      end
+    end
+
+    context 'when inherited' do
+      class AnotherBasicExample < BasicExample
+      end
+
+      subject { AnotherBasicExample.attributes }
+
+      its(:size) { is_expected.to eq 1 }
     end
 
     describe '#mass_assign' do
